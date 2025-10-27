@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.20" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DataListing.Domain\DataListing.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

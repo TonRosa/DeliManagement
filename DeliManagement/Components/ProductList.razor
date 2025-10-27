@@ -1,0 +1,52 @@
+﻿<h3>ProductList</h3>
+
+@using Microsoft.AspNetCore.Components;
+@using DataListing.Domain;
+@using System.Collections.Generic;
+@using System.Linq;
+
+@if (products == null || !products.Any())
+{
+    <p><em>No products to display.</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th class="text-end">Price</th>
+                <th class="text-end">Stock</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in products)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.Name</td>
+                    <td>@p.Category</td>
+                    <td class="text-end">@p.Price.ToString("C")</td>
+                    <td class="text-end">@p.Stock</td>
+                    <td>@p.CreatedDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Product> products = new();
+
+    [Parameter]
+    public int Count { get; set; } = 20;
+
+    protected override void OnInitialized()
+    {
+        // Ensure non-negative count
+        products = MockData.GetProduct(Math.Max(0, Count));
+    }
+}
